@@ -50,7 +50,8 @@ class NewsModel{
     var title: String = ""
     var date: String = ""
     var text: String = ""
-    var image_url = 0
+    var image_url: Int = 0
+    var image_url_string: String = ""
 
     fun getImageUrl(): Int {
         return image_url

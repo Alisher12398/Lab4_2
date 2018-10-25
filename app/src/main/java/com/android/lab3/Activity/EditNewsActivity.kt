@@ -34,7 +34,7 @@ class EditNewsActivity : AppCompatActivity() {
         title_addnews.setText(news.title, TextView.BufferType.EDITABLE)
         date_addnews.setText(news.date, TextView.BufferType.EDITABLE)
         text_addnews.setText(news.text, TextView.BufferType.EDITABLE)
-        //title_addnews.setText(news.title, TextView.BufferType.EDITABLE)
+        image_addnews.setText(news.image_url_string, TextView.BufferType.EDITABLE)
 
 
 

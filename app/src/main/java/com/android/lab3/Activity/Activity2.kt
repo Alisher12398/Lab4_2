@@ -20,16 +20,9 @@ class Activity2 : AppCompatActivity() {
         val intent = intent
 
         var db = Database(this)
-        val sqlitedatabase = db.writableDatabase
+        //val sqlitedatabase = db.writableDatabase
 
-        //intent.getParcelableArrayExtra("selected_news_id")
-
-
-       // val mIntent = getIntent()
         val intValue = intent.getIntExtra("selected_news_id", 0)
-        //val exampleItem = intent.getParcelableExtra<NewsModel>("ExampleItem")
-
-
 
         val news = db.selectByID(intValue)
 
@@ -43,14 +36,14 @@ class Activity2 : AppCompatActivity() {
         textView3.text = news.text
 
         val image2 = findViewById<ImageView>(R.id.image_activity2)
-        image2.setImageResource(R.drawable.footbal)
+        //image2.setImageResource(news.image_url)
 
-        /*when(line4){
-            "footbal" -> image2.setImageResource(R.drawable.footbal)
-            "wifi" -> image2.setImageResource(R.drawable.wifi)
+        when(news.image_url_string){
+            "football" -> image2.setImageResource(R.drawable.footbal)
             "amazon" -> image2.setImageResource(R.drawable.news1)
+            "wifi" -> image2.setImageResource(R.drawable.wifi)
             "uber" -> image2.setImageResource(R.drawable.uber)
-        }*/
+        }
 
         floating_button.setOnClickListener {
             val toast = Toast.makeText(this,
@@ -75,20 +68,6 @@ class Activity2 : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
-
-
-        /* val intent = intent
-         val exampleItem = intent.getParcelableExtra<NewsModel>("Example Item")
-
-         val line1 = exampleItem.title
-         val line2 = exampleItem.date
-
-
-         val textView1 = findViewById<TextView>(R.id.title_activity2)
-         textView1.text = line1
-
-         val textView2 = findViewById<TextView>(R.id.date_activity2)
-         textView1.text = line2*/
 
     }
 

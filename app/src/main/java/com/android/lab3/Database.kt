@@ -15,7 +15,7 @@ class Database (context: Context) : SQLiteOpenHelper(context, "db", null, 1){
 
 
         //val CREATE_TABLE = "CREATE TABLE $TABLE_NAME ($ID INTEGER PRIMARY KEY, $NAME TEXT,$PASS TEXT);"
-        val CREATE_TABLE = "CREATE TABLE News (id INTEGER PRIMARY KEY, title TEXT, date TEXT, text TEXT, image_url INTEGER);"
+        val CREATE_TABLE = "CREATE TABLE News (id INTEGER PRIMARY KEY, title TEXT, date TEXT, text TEXT, image_url INTEGER, image_url_string TEXT);"
         db.execSQL(CREATE_TABLE)
     }
 
@@ -31,6 +31,7 @@ class Database (context: Context) : SQLiteOpenHelper(context, "db", null, 1){
         values.put("date", news.date)
         values.put("text", news.text)
         values.put("image_url", news.image_url)
+        values.put("image_url_string", news.image_url_string)
         db.insert("News", null, values)
         db.close()
     }
@@ -50,6 +51,7 @@ class Database (context: Context) : SQLiteOpenHelper(context, "db", null, 1){
                     news.date = cursor.getString(cursor.getColumnIndex("date"))
                     news.text = cursor.getString(cursor.getColumnIndex("text"))
                     news.image_url = cursor.getInt(cursor.getColumnIndex("image_url"))
+                    news.image_url_string = cursor.getString(cursor.getColumnIndex("image_url_string"))
                     newsList.add(news)
                 } while (cursor.moveToNext())
             }
@@ -69,7 +71,7 @@ class Database (context: Context) : SQLiteOpenHelper(context, "db", null, 1){
         tasks.title = cursor.getString(cursor.getColumnIndex("title"))
         tasks.date = cursor.getString(cursor.getColumnIndex("date"))
         tasks.text = cursor.getString(cursor.getColumnIndex("text"))
-
+        tasks.image_url_string = cursor.getString(cursor.getColumnIndex("image_url_string"))
         cursor.close()
         return tasks
     }
@@ -82,10 +84,11 @@ class Database (context: Context) : SQLiteOpenHelper(context, "db", null, 1){
     }
 
 
-
-
-
-
+    fun deleteAllNews() {
+        val db = this.writableDatabase
+        val _success = db.delete("News", null, null).toLong()
+        db.close()
+    }
 
 }
 
